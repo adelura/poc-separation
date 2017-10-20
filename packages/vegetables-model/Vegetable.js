@@ -1,12 +1,8 @@
 class Vegetable {
-    constructor(id, name) {
-        this.id = id;
+    constructor(name, id) {
         this.name = name;
-    }
-
-    toJSON() {
-        return JSON.stringify(this);
+        this.id = id;
     }
 }
 
-export default Vegetable;
+module.exports = Vegetable;

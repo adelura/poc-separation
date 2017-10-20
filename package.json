@@ -1,5 +1,14 @@
 {
-	"devDependencies": {
-		"lerna": "^2.4.0"
-	}
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "lerna": "^2.4.0",
+    "vue-loader": "^13.3.0",
+    "vue-template-compiler": "^2.5.2"
+  },
+  "dependencies": {
+    "angular": "^1.6.6",
+    "angular-ui-router": "^0.4.3"
+  }
 }

@@ -1,19 +1,30 @@
-import Vegetable from "./Vegetable";
+let Vegetable = require("./Vegetable");
+const baseHref = "http://127.0.0.1:3000";
 
 class VegetableModel {
     constructor(fetch) {
         this.fetch = fetch;
     }
 
-    async getVegetables() {
-        let fruits = await this.fetch("/vegetables");
+    getVegetables() {
+        return this.fetch(`${baseHref}/vegetables`);
     }
 
-    async addVegetable(vegetable) {
-        await this.fetch("/vegetables", { method: "POST", body: vegetable.toJSON() });
+    addVegetable(name) {
+        let config = {
+            method: "post",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(new Vegetable(name))
+        };
+
+        return this.fetch(`${baseHref}/vegetables`, config);
     }
 
-    async removeVegetable(vegetable) {
-        await this.fetch(`/vegetable/${vegetable.id}`, { method: "DELETE" });
+    removeVegetable(id) {
+        return this.fetch(`${baseHref}/vegetables/${id}`, { method: "DELETE" });
     }
 }
+
+module.exports = VegetableModel;

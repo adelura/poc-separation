@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>Vegetables client</h2>
+        <h2>Vegetables Vue client</h2>
 
         <form @submit.prevent="submit">
             <label>
@@ -10,6 +10,10 @@
                     type="text"
                 />
             </label>
+
+            <p v-if="!isValidName(vegetable)">
+                {{ getInvalidNameMessage(vegetable) }}
+            </p>
         </form>
         <span>Vegetable name: {{ vegetable }}</span>
     </div>
@@ -17,6 +21,7 @@
 
 <script>
     import VegetablesModel from 'vegetables-model';
+    import Vegetable from 'vegetables-model/Vegetable';
 
     let vegetablesModel = new VegetablesModel(fetch.bind(window));
 
@@ -27,9 +32,17 @@
             }
         },
         methods: {
-            submit() {
-                vegetablesModel.addVegetable(this.vegetable);
-            }
+            async submit() {
+                if (!this.isValidName(this.vegetable)) {
+                    return;
+                }
+
+                await vegetablesModel.addVegetable(this.vegetable);
+                this.vegetable = '';
+                return false;
+            },
+            isValidName: Vegetable.isValidName,
+            getInvalidNameMessage: Vegetable.getInvalidNameMessage
         }
     };
 </script>
